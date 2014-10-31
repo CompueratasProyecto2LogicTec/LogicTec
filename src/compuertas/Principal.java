@@ -9,6 +9,7 @@ import java.awt.MouseInfo;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -33,6 +34,7 @@ public class Principal extends javax.swing.JFrame {
     private int nor;
     private int nand;
     private int raya;
+    private int rayaV;
     private int X;
     private int Y;
     private Lista listComp;
@@ -59,6 +61,7 @@ public class Principal extends javax.swing.JFrame {
         raya= 0;
         X=0;
         Y=0;
+        rayaV=0;
         listComp= new Lista();
         ands= new JLabel();
         Connect = new ConecComp();
@@ -69,6 +72,86 @@ public class Principal extends javax.swing.JFrame {
         
     }
     
+    private void SetImage(int i){
+        if(numEntradas != 0 && ingresar == true)
+            listComp.insertHead(ands);
+        if(i==0){
+            and++;
+            val.setTotalL("and"+ Integer.toString(and));
+            ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/and.png")));
+        }else if(i==1){
+             or++;
+            val.setTotalL("or"+ Integer.toString(or));
+            ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/or.png")));
+        }else if(i==2){
+            not++;
+            val.setTotalL("not"+ Integer.toString(not));
+            ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/not.png")));
+        }else if(i==3){
+            nand++;
+            val.setTotalL("nand"+ Integer.toString(nand));
+            ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nand.png")));
+        }else if(i==4){
+            nor++;
+            val.setTotalL("nor"+ Integer.toString(nor));
+            ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nor.png")));
+        }else if(i==5){
+            xor++;
+            val.setTotalL("xor"+ Integer.toString(xor));
+            ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xor.png")));
+        }else if(i==6){
+           xnor++;
+            val.setTotalL("xnor"+ Integer.toString(xnor));
+            ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Xnor.png"))); 
+        }
+        getContentPane().add(ands);
+        fondo.add(ands);
+        ands.setBounds(200, 200, 95, 73);
+        numEntradas ++;
+        ingresar= true;
+    }
+    
+    private String Rndraya(int j){
+        String [] arregloRnd={"/imagenes/raya1.png","/imagenes/raya2.png","/imagenes/raya3.png","/imagenes/raya4.png","/imagenes/raya5.png","/imagenes/raya6.png"};
+        String [] arregloRndV={"/imagenes/raya1V.png","/imagenes/raya2V.png","/imagenes/raya3V.png","/imagenes/raya4V.png","/imagenes/raya5V.png","/imagenes/raya6V.png"};
+        Random rnd = new Random();
+        int i= rnd.nextInt(5);
+        if (j==0){
+            String temp= arregloRnd[i];
+            return temp;
+        }
+        else{
+            String temp= arregloRndV[i];
+            return temp;
+        }
+    }
+
+    private void CodRaya(int i){
+        if(i==0){
+            if(numEntradas != 0 && ingresar == true)
+                listComp.insertHead(ands);
+            raya++;
+            val.setTotalL("raya"+ Integer.toString(raya));
+            ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource(Rndraya(0))));
+            getContentPane().add(ands);
+            fondo.add(ands);
+            ands.setBounds(200, 200, 95, 73);
+            numEntradas ++;
+            ingresar =true;
+        }
+        else{
+            if(numEntradas != 0 && ingresar == true)
+                listComp.insertHead(ands);
+            rayaV++;
+            val.setTotalL("rayaV"+ Integer.toString(rayaV));
+            ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource(Rndraya(1))));
+            getContentPane().add(ands);
+            fondo.add(ands);
+            ands.setBounds(200, 200, 95, 73);
+            numEntradas ++;
+            ingresar =true;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,7 +161,9 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSeparator1 = new javax.swing.JSeparator();
+        ClickDer = new javax.swing.JPopupMenu();
+        SetIn = new javax.swing.JMenuItem();
+        Del = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         BtnAnd = new javax.swing.JButton();
         BtnOr = new javax.swing.JButton();
@@ -89,6 +174,7 @@ public class Principal extends javax.swing.JFrame {
         BtnXnor = new javax.swing.JButton();
         BtnRaya = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        BtnrayaV = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -103,16 +189,19 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
 
+        SetIn.setText("Establecer entradas de compuerta");
+        SetIn.setToolTipText("Establecer entradas de compuerta");
+        ClickDer.add(SetIn);
+
+        Del.setText("Borrar elemento");
+        Del.setToolTipText(" Borrar elemento");
+        ClickDer.add(Del);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Diagramador de compuertas\n");
         setBackground(new java.awt.Color(0, 0, 0));
         setBounds(new java.awt.Rectangle(100, 22, 680, 520));
-        setMinimumSize(new java.awt.Dimension(680, 520));
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                formMouseClicked(evt);
-            }
-        });
+        setMinimumSize(new java.awt.Dimension(950, 600));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 formMouseDragged(evt);
@@ -121,34 +210,33 @@ public class Principal extends javax.swing.JFrame {
                 formMouseMoved(evt);
             }
         });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
         BtnAnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/and.jpg"))); // NOI18N
+        BtnAnd.setToolTipText("And");
         BtnAnd.setBorderPainted(false);
+        BtnAnd.setComponentPopupMenu(ClickDer);
         BtnAnd.setContentAreaFilled(false);
-        BtnAnd.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                BtnAndMousePressed(evt);
-            }
-        });
-        BtnAnd.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                BtnAndMouseDragged(evt);
-            }
-        });
         BtnAnd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAndActionPerformed(evt);
             }
         });
         jPanel1.add(BtnAnd);
-        BtnAnd.setBounds(10, 50, 87, 29);
+        BtnAnd.setBounds(0, 50, 87, 29);
 
         BtnOr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/or.jpg"))); // NOI18N
+        BtnOr.setToolTipText("Or");
         BtnOr.setBorderPainted(false);
+        BtnOr.setComponentPopupMenu(ClickDer);
         BtnOr.setContentAreaFilled(false);
         BtnOr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +247,9 @@ public class Principal extends javax.swing.JFrame {
         BtnOr.setBounds(10, 90, 70, 29);
 
         BtnNot.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/not.jpg"))); // NOI18N
+        BtnNot.setToolTipText("Not");
         BtnNot.setBorderPainted(false);
+        BtnNot.setComponentPopupMenu(ClickDer);
         BtnNot.setContentAreaFilled(false);
         BtnNot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,7 +260,9 @@ public class Principal extends javax.swing.JFrame {
         BtnNot.setBounds(10, 130, 70, 29);
 
         BtnNand.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nand.jpg"))); // NOI18N
+        BtnNand.setToolTipText("Nand");
         BtnNand.setBorderPainted(false);
+        BtnNand.setComponentPopupMenu(ClickDer);
         BtnNand.setContentAreaFilled(false);
         BtnNand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,7 +273,9 @@ public class Principal extends javax.swing.JFrame {
         BtnNand.setBounds(10, 180, 70, 29);
 
         BtnNor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nor.jpg"))); // NOI18N
+        BtnNor.setToolTipText("Nor");
         BtnNor.setBorderPainted(false);
+        BtnNor.setComponentPopupMenu(ClickDer);
         BtnNor.setContentAreaFilled(false);
         BtnNor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,7 +286,9 @@ public class Principal extends javax.swing.JFrame {
         BtnNor.setBounds(10, 230, 70, 29);
 
         BtnXor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xor.jpg"))); // NOI18N
+        BtnXor.setToolTipText("Xor");
         BtnXor.setBorderPainted(false);
+        BtnXor.setComponentPopupMenu(ClickDer);
         BtnXor.setContentAreaFilled(false);
         BtnXor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,7 +299,9 @@ public class Principal extends javax.swing.JFrame {
         BtnXor.setBounds(10, 270, 70, 40);
 
         BtnXnor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xnor.jpg"))); // NOI18N
+        BtnXnor.setToolTipText("Xnor");
         BtnXnor.setBorderPainted(false);
+        BtnXnor.setComponentPopupMenu(ClickDer);
         BtnXnor.setContentAreaFilled(false);
         BtnXnor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,7 +312,9 @@ public class Principal extends javax.swing.JFrame {
         BtnXnor.setBounds(10, 320, 70, 29);
 
         BtnRaya.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/raya.jpg"))); // NOI18N
+        BtnRaya.setToolTipText("Conexion");
         BtnRaya.setBorderPainted(false);
+        BtnRaya.setComponentPopupMenu(ClickDer);
         BtnRaya.setContentAreaFilled(false);
         BtnRaya.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,10 +327,23 @@ public class Principal extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Kokonor", 1, 14)); // NOI18N
         jLabel2.setText("compuertas");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 10, 80, 19);
+        jLabel2.setBounds(10, 10, 90, 19);
+
+        BtnrayaV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rayaV.jpg"))); // NOI18N
+        BtnrayaV.setToolTipText("Conexion vertical");
+        BtnrayaV.setBorderPainted(false);
+        BtnrayaV.setComponentPopupMenu(ClickDer);
+        BtnrayaV.setContentAreaFilled(false);
+        BtnrayaV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnrayaVActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnrayaV);
+        BtnrayaV.setBounds(20, 410, 50, 70);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 100, 470);
+        jPanel1.setBounds(0, 0, 100, 990);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Kokonor", 0, 18)); // NOI18N
@@ -241,7 +354,7 @@ public class Principal extends javax.swing.JFrame {
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.jpg"))); // NOI18N
         getContentPane().add(fondo);
-        fondo.setBounds(100, 0, 550, 470);
+        fondo.setBounds(100, 0, 1310, 980);
 
         opciones.setText("Opciones");
 
@@ -301,94 +414,31 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_outActionPerformed
 
     private void BtnAndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAndActionPerformed
-        if(numEntradas != 0 && ingresar == true)
-            listComp.insertHead(ands);
-        and++;
-        val.setTotalL("and"+ Integer.toString(and));
-        ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/and.png")));
-        getContentPane().add(ands);
-        fondo.add(ands);
-        ands.setBounds(200, 200, 95, 73);
-        numEntradas ++;
-        ingresar= true;
+        SetImage(0);
     }//GEN-LAST:event_BtnAndActionPerformed
 
     private void BtnOrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOrActionPerformed
-        if(numEntradas != 0 && ingresar == true)
-            listComp.insertHead(ands);
-        or++;
-        val.setTotalL("or"+ Integer.toString(or));
-        ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/or.png")));
-        getContentPane().add(ands);
-        fondo.add(ands);
-        ands.setBounds(200, 200, 95, 73);
-        numEntradas ++;
-        ingresar =true;
+        SetImage(1);
     }//GEN-LAST:event_BtnOrActionPerformed
 
     private void BtnNotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotActionPerformed
-        if(numEntradas != 0 && ingresar == true)
-            listComp.insertHead(ands);
-        not++;
-        val.setTotalL("not"+ Integer.toString(not));
-        ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/not.png")));
-        getContentPane().add(ands);
-        fondo.add(ands);
-        ands.setBounds(200, 200, 95, 73);
-        numEntradas ++;
-        ingresar =true;
+        SetImage(2);
     }//GEN-LAST:event_BtnNotActionPerformed
 
     private void BtnNandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNandActionPerformed
-        if(numEntradas != 0 && ingresar == true)
-            listComp.insertHead(ands);
-        nand++;
-        val.setTotalL("nand"+ Integer.toString(nand));
-        ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nand.png")));
-        getContentPane().add(ands);
-        fondo.add(ands);
-        ands.setBounds(200, 200, 95, 73);
-        numEntradas ++;
-        ingresar =true;
+        SetImage(3);
     }//GEN-LAST:event_BtnNandActionPerformed
 
     private void BtnNorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNorActionPerformed
-        if(numEntradas != 0 && ingresar == true)
-            listComp.insertHead(ands);
-        nor++;
-        val.setTotalL("nor"+ Integer.toString(nor));
-        ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nor.png")));
-        getContentPane().add(ands);
-        fondo.add(ands);
-        ands.setBounds(200, 200, 95, 73);
-        numEntradas ++;
-        ingresar =true;
+        SetImage(4);
     }//GEN-LAST:event_BtnNorActionPerformed
 
     private void BtnXorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnXorActionPerformed
-        if(numEntradas != 0 && ingresar == true)        
-            listComp.insertHead(ands);
-        xor++;
-        val.setTotalL("xor"+ Integer.toString(xor));
-        ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xor.png")));
-        getContentPane().add(ands);
-        fondo.add(ands);
-        ands.setBounds(200, 200, 95, 73);
-        numEntradas ++;
-        ingresar =true;
+        SetImage(5);
     }//GEN-LAST:event_BtnXorActionPerformed
 
     private void BtnXnorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnXnorActionPerformed
-        if(numEntradas != 0 && ingresar == true)
-            listComp.insertHead(ands);
-        xnor++;
-        val.setTotalL("xnor"+ Integer.toString(xnor));
-        ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Xnor.png")));
-        getContentPane().add(ands);
-        fondo.add(ands);
-        ands.setBounds(200, 200, 95, 73);
-        numEntradas ++;
-        ingresar =true;
+        SetImage(6);
     }//GEN-LAST:event_BtnXnorActionPerformed
 
     private void entradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entradasActionPerformed
@@ -401,20 +451,10 @@ public class Principal extends javax.swing.JFrame {
         Connect.setVisible(true);
     }//GEN-LAST:event_connectActionPerformed
 
-    private void BtnAndMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAndMousePressed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_BtnAndMousePressed
-
     private void BtnRayaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRayaActionPerformed
         // TODO add your handling code here:
-        raya++;
-        val.setTotalL("raya"+ Integer.toString(raya));
+        CodRaya(0);
     }//GEN-LAST:event_BtnRayaActionPerformed
-
-    private void BtnAndMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnAndMouseDragged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnAndMouseDragged
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         // TODO add your handling code here:
@@ -464,6 +504,11 @@ public class Principal extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_formMouseMoved
 
+    private void BtnrayaVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnrayaVActionPerformed
+        // TODO add your handling code here:
+        CodRaya(1);
+    }//GEN-LAST:event_BtnrayaVActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -509,6 +554,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton BtnRaya;
     private javax.swing.JButton BtnXnor;
     private javax.swing.JButton BtnXor;
+    private javax.swing.JButton BtnrayaV;
+    private javax.swing.JPopupMenu ClickDer;
+    private javax.swing.JMenuItem Del;
+    private javax.swing.JMenuItem SetIn;
     private javax.swing.JMenuItem check;
     private javax.swing.JMenuItem connect;
     private javax.swing.JMenuItem entradas;
@@ -521,9 +570,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JMenu opciones;
     private javax.swing.JMenuItem out;
     private javax.swing.JMenuItem qwerty;
     // End of variables declaration//GEN-END:variables
+
 }
