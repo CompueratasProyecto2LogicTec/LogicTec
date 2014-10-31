@@ -41,6 +41,9 @@ public class Principal extends javax.swing.JFrame {
     private boolean intersecs = false;
     private boolean enter = false;
     ObtenerEntradas entrarVal;
+    public boolean ingresar;
+    private int numEntradas;
+    
     
     /**
      * Creates new form ventan1
@@ -61,6 +64,7 @@ public class Principal extends javax.swing.JFrame {
         Connect = new ConecComp();
         val= new cuadroVal();
         entrarVal = new ObtenerEntradas();
+        numEntradas=0;
         initComponents();
         
     }
@@ -125,14 +129,14 @@ public class Principal extends javax.swing.JFrame {
         BtnAnd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/and.jpg"))); // NOI18N
         BtnAnd.setBorderPainted(false);
         BtnAnd.setContentAreaFilled(false);
-        BtnAnd.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                BtnAndMouseDragged(evt);
-            }
-        });
         BtnAnd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 BtnAndMousePressed(evt);
+            }
+        });
+        BtnAnd.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                BtnAndMouseDragged(evt);
             }
         });
         BtnAnd.addActionListener(new java.awt.event.ActionListener() {
@@ -297,73 +301,94 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_outActionPerformed
 
     private void BtnAndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAndActionPerformed
-        listComp.insertHead(ands);
+        if(numEntradas != 0 && ingresar == true)
+            listComp.insertHead(ands);
         and++;
         val.setTotalL("and"+ Integer.toString(and));
         ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/and.png")));
         getContentPane().add(ands);
         fondo.add(ands);
         ands.setBounds(200, 200, 95, 73);
+        numEntradas ++;
+        ingresar= true;
     }//GEN-LAST:event_BtnAndActionPerformed
 
     private void BtnOrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnOrActionPerformed
-        listComp.insertHead(ands);
+        if(numEntradas != 0 && ingresar == true)
+            listComp.insertHead(ands);
         or++;
         val.setTotalL("or"+ Integer.toString(or));
         ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/or.png")));
         getContentPane().add(ands);
         fondo.add(ands);
         ands.setBounds(200, 200, 95, 73);
+        numEntradas ++;
+        ingresar =true;
     }//GEN-LAST:event_BtnOrActionPerformed
 
     private void BtnNotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNotActionPerformed
-        listComp.insertHead(ands);
+        if(numEntradas != 0 && ingresar == true)
+            listComp.insertHead(ands);
         not++;
         val.setTotalL("not"+ Integer.toString(not));
         ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/not.png")));
         getContentPane().add(ands);
         fondo.add(ands);
         ands.setBounds(200, 200, 95, 73);
+        numEntradas ++;
+        ingresar =true;
     }//GEN-LAST:event_BtnNotActionPerformed
 
     private void BtnNandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNandActionPerformed
-        listComp.insertHead(ands);
+        if(numEntradas != 0 && ingresar == true)
+            listComp.insertHead(ands);
         nand++;
         val.setTotalL("nand"+ Integer.toString(nand));
         ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nand.png")));
         getContentPane().add(ands);
         fondo.add(ands);
         ands.setBounds(200, 200, 95, 73);
+        numEntradas ++;
+        ingresar =true;
     }//GEN-LAST:event_BtnNandActionPerformed
 
     private void BtnNorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNorActionPerformed
-        listComp.insertHead(ands);
+        if(numEntradas != 0 && ingresar == true)
+            listComp.insertHead(ands);
         nor++;
         val.setTotalL("nor"+ Integer.toString(nor));
         ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nor.png")));
         getContentPane().add(ands);
         fondo.add(ands);
         ands.setBounds(200, 200, 95, 73);
+        numEntradas ++;
+        ingresar =true;
     }//GEN-LAST:event_BtnNorActionPerformed
 
     private void BtnXorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnXorActionPerformed
-        listComp.insertHead(ands);
+        if(numEntradas != 0 && ingresar == true)        
+            listComp.insertHead(ands);
         xor++;
         val.setTotalL("xor"+ Integer.toString(xor));
         ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/xor.png")));
         getContentPane().add(ands);
         fondo.add(ands);
         ands.setBounds(200, 200, 95, 73);
+        numEntradas ++;
+        ingresar =true;
     }//GEN-LAST:event_BtnXorActionPerformed
 
     private void BtnXnorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnXnorActionPerformed
-        listComp.insertHead(ands);
+        if(numEntradas != 0 && ingresar == true)
+            listComp.insertHead(ands);
         xnor++;
         val.setTotalL("xnor"+ Integer.toString(xnor));
         ands= new JLabel(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Xnor.png")));
         getContentPane().add(ands);
         fondo.add(ands);
         ands.setBounds(200, 200, 95, 73);
+        numEntradas ++;
+        ingresar =true;
     }//GEN-LAST:event_BtnXnorActionPerformed
 
     private void entradasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entradasActionPerformed
@@ -396,6 +421,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseDragged
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        if(ingresar == true){
+            System.out.println("ingreso a este espacio");
+            listComp.insertHead(ands);
+            ingresar = false;
+        }
         if ((enter == false)){
             System.out.println("entra");
             Rectangle comp = new Rectangle(X,Y,5,5);
