@@ -454,6 +454,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_formMouseClicked
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        System.out.println("ok");
         X=evt.getX()-108;
         Y=evt.getY()-53;
         System.out.println("X:" +X+ " Y: "+Y);
